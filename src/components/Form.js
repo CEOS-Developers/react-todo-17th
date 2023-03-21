@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function Form({ getTodo }) {
-  const [value, setValue] = useState('');
-
+function Form({ getTodo, value, setValue }) {
   const submitTodo = (e) => {
     e.preventDefault();
 
     if (value.trim()) {
       getTodo(value);
-      console.log(value);
       setValue('');
     } else {
       alert('Enter your todo');
@@ -52,7 +49,7 @@ const Enter = styled.div`
     border: none;
     background: none;
     font-size: 18px;
-    width: 30px;
+    width: 40px;
   }
 `;
 

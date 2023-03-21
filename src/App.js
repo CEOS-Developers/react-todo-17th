@@ -6,27 +6,53 @@ import Done from './components/Done';
 
 function App() {
   const [list, setList] = useState([]);
+  const [value, setValue] = useState('');
 
-  const getTodo = (value) => {
+  const getTodo = (todo) => {
     const newTodo = {
       id: Date.now(),
-      title: value,
+      title: todo,
       completed: false,
     };
-    setList((prev) => [...prev, newTodo]);
+    setList([...list, newTodo]);
   };
 
   return (
     <>
       <GlobalStyle />
       <Conatiner>
-        <Form getTodo={getTodo}></Form>
-        <Todo></Todo>
+        <Form getTodo={getTodo} value={value} setValue={setValue}></Form>
+        <TodoContainer>
+          <h3>To do...😿</h3>
+          {list.map((data) =>
+            data.completed ? <></> : <Todo Todo={data}></Todo>
+          )}
+        </TodoContainer>
+        <DoneContainer>
+          <h3>Done..!😻</h3>
+          {list.map((data) =>
+            data.completed ? <Done Done={data}></Done> : <></>
+          )}
+        </DoneContainer>
         <Done></Done>
       </Conatiner>
     </>
   );
 }
+const TodoContainer = styled.div`
+  flex: 0.5;
+  border-top: 2px solid rgb(177, 171, 171);
+  overflow: auto;
+  padding-left: 10px;
+  padding: 0px 20px 15px 20px;
+`;
+const DoneContainer = styled.div`
+  flex: 0.5;
+  border-top: 2px solid rgb(177, 171, 171);
+  overflow: auto;
+  padding-left: 10px;
+  padding: 0px 20px 15px 20px;
+`;
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: rgb(186, 191, 225);
