@@ -17,6 +17,15 @@ function App() {
     setList([...list, newTodo]);
   };
 
+  const toggleTodo = (id) => {
+    console.log(id);
+    setList(
+      list.map((data) =>
+        data.id === id ? { ...data, completed: !data.completed } : data
+      )
+    );
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -25,13 +34,21 @@ function App() {
         <TodoContainer>
           <h3>To do...😿</h3>
           {list.map((data) =>
-            data.completed ? <></> : <Todo Todo={data}></Todo>
+            data.completed ? (
+              <></>
+            ) : (
+              <Todo Todo={data} toggleTodo={toggleTodo}></Todo>
+            )
           )}
         </TodoContainer>
         <DoneContainer>
           <h3>Done..!😻</h3>
           {list.map((data) =>
-            data.completed ? <Done Done={data}></Done> : <></>
+            data.completed ? (
+              <Done Todo={data} toggleTodo={toggleTodo}></Done>
+            ) : (
+              <></>
+            )
           )}
         </DoneContainer>
         <Done></Done>

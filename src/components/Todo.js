@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Todo({ Todo }) {
+function Todo({ Todo, toggleTodo }) {
   return (
     <TodoList>
       <div>{Todo.title}</div>
-      <button id="check-button">✔</button>
+      <button id="check-button" onClick={() => toggleTodo(Todo.id)}>
+        ✔
+      </button>
       <button id="delete-button">✖</button>
     </TodoList>
   );
