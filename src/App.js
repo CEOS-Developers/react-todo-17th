@@ -45,6 +45,8 @@ function App() {
             ) : (
               <Todo
                 Todo={data}
+                list={list}
+                setList={setList}
                 toggleTodo={toggleTodo}
                 deleteTodo={deleteTodo}
               ></Todo>
