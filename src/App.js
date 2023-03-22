@@ -5,7 +5,6 @@ import Todo from './components/Todo';
 import Done from './components/Done';
 
 function App() {
-  console.log('app');
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
 
@@ -38,7 +37,7 @@ function App() {
       <GlobalStyle />
       <Conatiner>
         <Form getTodo={getTodo} value={value} setValue={setValue}></Form>
-        <TodoContainer>
+        <Section>
           <h3>To do...😿{countTodo}</h3>
           {list.map((data) =>
             data.completed ? (
@@ -53,8 +52,8 @@ function App() {
               ></Todo>
             )
           )}
-        </TodoContainer>
-        <DoneContainer>
+        </Section>
+        <Section>
           <h3>Done..!😻{list.length - countTodo}</h3>
           {list.map((data) =>
             data.completed ? (
@@ -67,19 +66,12 @@ function App() {
               <></>
             )
           )}
-        </DoneContainer>
+        </Section>
       </Conatiner>
     </>
   );
 }
-const TodoContainer = styled.div`
-  flex: 0.5;
-  border-top: 2px solid rgb(177, 171, 171);
-  overflow: auto;
-  padding-left: 10px;
-  padding: 0px 20px 15px 20px;
-`;
-const DoneContainer = styled.div`
+const Section = styled.div`
   flex: 0.5;
   border-top: 2px solid rgb(177, 171, 171);
   overflow: auto;

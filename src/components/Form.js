@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Form({ getTodo, value, setValue }) {
-  console.log('form');
+const Form = ({ getTodo, value, setValue }) => {
   const submitTodo = (e) => {
     e.preventDefault();
 
@@ -35,7 +34,7 @@ function Form({ getTodo, value, setValue }) {
       </Enter>
     </div>
   );
-}
+};
 const Enter = styled.div`
   padding: 0px 20px 15px 20px;
   #input-todo {
