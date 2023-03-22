@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import Form from './components/Form';
 import Todo from './components/Todo';
 import Done from './components/Done';
+import GlobalStyle from './styles/GloalStyle';
 
 function App() {
   const [list, setList] = useState([]);
@@ -78,15 +79,6 @@ const Section = styled.div`
   padding-left: 10px;
   padding: 0px 20px 15px 20px;
 `;
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: rgb(186, 191, 225);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  `;
 const Conatiner = styled.div`
   background-color: white;
   display: flex;
