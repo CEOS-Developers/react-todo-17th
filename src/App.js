@@ -29,13 +29,16 @@ function App() {
     setList(list.filter((data) => data.id !== id));
   };
 
+  let countTodo = 0;
+  list.map((data) => (data.completed ? data : countTodo++));
+
   return (
     <>
       <GlobalStyle />
       <Conatiner>
         <Form getTodo={getTodo} value={value} setValue={setValue}></Form>
         <TodoContainer>
-          <h3>To do...😿</h3>
+          <h3>To do...😿{countTodo}</h3>
           {list.map((data) =>
             data.completed ? (
               <></>
@@ -49,7 +52,7 @@ function App() {
           )}
         </TodoContainer>
         <DoneContainer>
-          <h3>Done..!😻</h3>
+          <h3>Done..!😻{list.length - countTodo}</h3>
           {list.map((data) =>
             data.completed ? (
               <Done
