@@ -6,7 +6,7 @@ function Done({ Todo, toggleTodo, deleteTodo }) {
     <DoneList>
       <div id="done-title">{Todo.title}</div>
       <button id="check-button" onClick={() => toggleTodo(Todo.id)}>
-        ✔
+        🔙
       </button>
       <button id="delete-button" onClick={() => deleteTodo(Todo.id)}>
         ✖
@@ -19,6 +19,7 @@ const DoneList = styled.div`
   display: flex;
   #done-title {
     text-decoration: line-through;
+    color: gray;
   }
   #delete-button {
     border: none;
