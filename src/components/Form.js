@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 function Form({ getTodo, value, setValue }) {
+  console.log('form');
   const submitTodo = (e) => {
     e.preventDefault();
 

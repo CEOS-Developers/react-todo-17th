@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 function Done({ Todo, toggleTodo, deleteTodo }) {
+  console.log('done');
   return (
     <DoneList>
       <div id="done-title">{Todo.title}</div>

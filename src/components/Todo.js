@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 function Todo({ Todo, toggleTodo, deleteTodo, title, list, setList }) {
+  console.log('todo');
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
 

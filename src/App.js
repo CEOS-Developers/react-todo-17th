@@ -5,6 +5,7 @@ import Todo from './components/Todo';
 import Done from './components/Done';
 
 function App() {
+  console.log('app');
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
 
