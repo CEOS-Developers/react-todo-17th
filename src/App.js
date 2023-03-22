@@ -18,12 +18,15 @@ function App() {
   };
 
   const toggleTodo = (id) => {
-    console.log(id);
     setList(
       list.map((data) =>
         data.id === id ? { ...data, completed: !data.completed } : data
       )
     );
+  };
+
+  const deleteTodo = (id) => {
+    setList(list.filter((data) => data.id !== id));
   };
 
   return (
@@ -37,7 +40,11 @@ function App() {
             data.completed ? (
               <></>
             ) : (
-              <Todo Todo={data} toggleTodo={toggleTodo}></Todo>
+              <Todo
+                Todo={data}
+                toggleTodo={toggleTodo}
+                deleteTodo={deleteTodo}
+              ></Todo>
             )
           )}
         </TodoContainer>
@@ -45,7 +52,11 @@ function App() {
           <h3>Done..!😻</h3>
           {list.map((data) =>
             data.completed ? (
-              <Done Todo={data} toggleTodo={toggleTodo}></Done>
+              <Done
+                Todo={data}
+                toggleTodo={toggleTodo}
+                deleteTodo={deleteTodo}
+              ></Done>
             ) : (
               <></>
             )

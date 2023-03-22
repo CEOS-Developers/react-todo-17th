@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Todo({ Todo, toggleTodo }) {
+function Todo({ Todo, toggleTodo, deleteTodo }) {
   return (
     <TodoList>
       <div>{Todo.title}</div>
       <button id="check-button" onClick={() => toggleTodo(Todo.id)}>
         ✔
       </button>
-      <button id="delete-button">✖</button>
+      <button id="delete-button" onClick={() => deleteTodo(Todo.id)}>
+        ✖
+      </button>
     </TodoList>
   );
 }
