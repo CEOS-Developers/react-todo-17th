@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { TODOKEY } from '../constants/TODOKEY';
 
 const ListContainer = ({ title, todoList, setTodoList, isDone }) => {
   const toggleIsDone = (e) => {
@@ -9,14 +10,17 @@ const ListContainer = ({ title, todoList, setTodoList, isDone }) => {
       }
     });
     setTodoList(tempList);
-    // @TODO - localStorage 연결
+
+    localStorage.setItem(TODOKEY, JSON.stringify(tempList));
   };
 
   const removeTodo = (e) => {
-    setTodoList(
-      todoList.filter((todo) => todo.time !== e.target.parentElement.id)
+    const tempList = todoList.filter(
+      (todo) => todo.time !== e.target.parentElement.id
     );
-    // @TODO - localStorage 연결
+    setTodoList(tempList);
+
+    localStorage.setItem(TODOKEY, JSON.stringify(tempList));
   };
 
   return (

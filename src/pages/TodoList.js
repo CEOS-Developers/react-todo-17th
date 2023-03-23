@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ListContainer from '../components/ListContainer';
+import { TODOKEY } from '../constants/TODOKEY';
 
 const TodoList = () => {
+  // const TODOKEY = 'todo';
   const [inputText, setInputText] = useState('');
-  const [todoList, setTodoList] = useState([]); // @TODO - localStorage.getItem 연결
+  const [todoList, setTodoList] = useState(
+    JSON.parse(localStorage.getItem(TODOKEY)) ?? []
+  );
   const [numOfTodo, setNumOfTodo] = useState(0);
   const [numOfDone, setNumOfDone] = useState(0);
 
@@ -28,11 +32,12 @@ const TodoList = () => {
       const todoObj = {
         text: inputText, // string
         time: String(Date.now()), // string,
-        isDone: false,
+        isDone: false, // boolean
       };
       setTodoList([...todoList, todoObj]);
       setInputText('');
-      // @TODO - localStorage.setItem 연결
+
+      localStorage.setItem(TODOKEY, JSON.stringify([...todoList, todoObj]));
     }
   };
 
