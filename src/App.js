@@ -46,6 +46,7 @@ function App() {
         onUpdateStatus={onUpdateStatus}
         filteredTodos={filteredTodos}
       />
+      <button onClick={() => setTodos([])}>CLEAR ALL</button>
     </div>
   );
 }

@@ -13,6 +13,7 @@ const Filter = ({ filters, onChangeFilter, todos }) => {
                   ? todos.length
                   : todos.filter((t) => t.status === filter.status).length}
               </span>
+              {/*카운트*/}
             </button>
           </li>
         ))}
