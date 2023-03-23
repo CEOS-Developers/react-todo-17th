@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import TodoList from './pages/TodoList';
 
 function App() {
