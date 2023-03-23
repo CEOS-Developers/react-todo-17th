@@ -2,7 +2,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { TODOKEY } from '../constants/TODOKEY';
 
-const ListContainer = ({ title, todoList, setTodoList, isDone }) => {
+const ListContainer = ({
+  title,
+  todoList,
+  setTodoList,
+  isDone,
+  setIsVisibleModal, // 컴포넌트 재사용성이 낮아지는 것 같은데.. 우짜지
+  setSelectedTodo, // 컴포넌트 재사용성이 낮아지는 것 같은데.. 우짜지
+}) => {
   const toggleIsDone = (e) => {
     const tempList = [...todoList];
     tempList.forEach((todo) => {
@@ -15,13 +22,9 @@ const ListContainer = ({ title, todoList, setTodoList, isDone }) => {
     localStorage.setItem(TODOKEY, JSON.stringify(tempList));
   };
 
-  const removeTodo = (e) => {
-    const tempList = todoList.filter(
-      (todo) => todo.time !== e.target.parentElement.id
-    );
-    setTodoList(tempList);
-
-    localStorage.setItem(TODOKEY, JSON.stringify(tempList));
+  const handleBtnClick = (e) => {
+    setSelectedTodo(e.target.parentElement);
+    setIsVisibleModal(true);
   };
 
   return (
@@ -34,7 +37,7 @@ const ListContainer = ({ title, todoList, setTodoList, isDone }) => {
             return (
               <SingleList id={todo.time} key={todo.time}>
                 <span onClick={toggleIsDone}>{todo.text}</span>
-                <button onClick={removeTodo}>🗑</button>
+                <button onClick={handleBtnClick}>🗑</button>
               </SingleList>
             );
           })}
@@ -48,6 +51,8 @@ ListContainer.propTypes = {
   todoList: PropTypes.array,
   setTodoList: PropTypes.func,
   isDone: PropTypes.bool,
+  setIsVisibleModal: PropTypes.func,
+  setSelectedTodo: PropTypes.func,
 };
 
 const Wrapper = styled.div`
