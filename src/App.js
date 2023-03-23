@@ -20,7 +20,8 @@ const Container = styled.div`
 const Title = styled.div`
     width: 90%;
     margin-left: 5%;
-    margin-top: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
     height: 5vh;
     color: white;
     font-size: 30px;
@@ -33,24 +34,24 @@ const Title = styled.div`
 
 const TodoTitle = styled. div`
     width: 82%;
-    height: 30px;
+    height: 32px;
     color: white;
-    font-size: 25px;
+    font-size: 28px;
     text-align: left;
-    font-weight: 600;
-    margin-left : 10%;
+    font-weight: bold;
+    margin-left : 15%;
     margin-top : 1.5rem;
     margin-bottom: 4px;
     display: flex;
 `
 const DoneTitle = styled. div`
     width: 82%;
-    height: 30px;
+    height: 32px;
     color: white;
-    font-size: 25px;
+    font-size: 28px;
     text-align: left;
-    font-weight: 600;
-    margin-left : 10%;
+    font-weight: bold;
+    margin-left : 15%;
     margin-top : 1.5rem;
     margin-bottom: 4px;
     display: flex;
@@ -59,7 +60,15 @@ const TodoBox = styled.div`
     position: relative;
     width: 82%;
     height: 30%;
-    margin-left: 3%;
+    margin-left: 8%;
+    margin-top: 1rem;
+`
+
+const DoneBox = styled.div`
+    position: relative;
+    width: 82%;
+    height: 30%;
+    margin-left: 8%;
     margin-top: 1rem;
 `
 
@@ -107,8 +116,11 @@ function App() {
                     addDoneList={addDoneList}/>
         </TodoBox>
         <DoneTitle>Done ({dones.length})</DoneTitle>
-        <DoneList dones={dones}
-                  onRemove_dn={onRemove_dn}/>
+        <DoneBox>
+          <DoneList dones={dones}
+                    onRemove_dn={onRemove_dn}
+                    addTodoList={addTodoList}/>
+        </DoneBox>
       </Container>
     </body>
   );

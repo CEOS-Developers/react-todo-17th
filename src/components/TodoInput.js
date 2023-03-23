@@ -5,7 +5,7 @@ const InputBox = styled.div`
     margin-left: 10%;
     margin-top: 1rem;
     width:80%;
-    height: 30px;
+    height: 35px;
     border-style: solid;
     border-width: 1px;
     border-color: white;
@@ -14,9 +14,10 @@ const InputBox = styled.div`
 `
 const TextInput = styled.input`
     width: 90%;
-    height: 28px;
+    height: 32px;
     text-align: center;
     background-color: black;
+    font-size: 15px;
     color: gray;
     border-style:none; 
 `
@@ -25,10 +26,10 @@ const InputButton = styled.button`
     background-color: white;
     border: solid 0.5px white;
     width: 10%;
-    height: 30px;
+    height: 35px;
     text-align: center;
     color: black;
-    font-size: 24px;
+    font-size: 28px;
 `
 
 

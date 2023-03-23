@@ -6,39 +6,54 @@ const TextBox = styled.div`
     width: 100%;
     border-color: white;
     color: white;
-    font-size: 20px;
-    font-weight: 250;
-    height: 27px;
+    font-size: 22px;
+    font-weight: medium;
+    height: 23px;
     margin: 0;
 `
 const DoneBox = styled.div`
     position: relative;
     display: flex;
     width: 82%;
-    height: 32%;
     margin-left: 10%;
-    margin-top: 1rem;
+    margin-top: 0.7rem;
 `
 const RtnBtn = styled.div`
     background-color: black;
-    border: 1px solid red;
+    border: 1.5px solid red;
     border-radius: 5%;
-    height: 22px;
+    height: 23px;
     width: 60px;
     color : red;
-    font-size: 18px;
-    font-weight: 100;
+    font-size: 19px;
+    font-weight: medium;
     margin-right: 25px;
     text-align: center;
 `
+const DltBtn = styled.div`
+    background-color: black;
+    border: none;
+    border-radius: 5%;
+    height: 22px;
+    width: 22px;
+    color : white;
+    font-size: 20px;
+    font-weight: medium;
+`
 
-const DoneItem = ({done, onRemove_dn})=>{
+const DoneItem = ({done, onRemove_dn, addTodoList})=>{
     const {id, text} = done;
+    const onReturn = (id, text) =>{
+        onRemove_dn(id);
+        addTodoList(text);
+
+    }
     
     return (
     <DoneBox>
-        <RtnBtn onClick={() => onRemove_dn(id)}>완료</RtnBtn>
+        <RtnBtn onClick={() => onReturn(id, text)}>복귀</RtnBtn>
         <TextBox>{text}</TextBox>
+        <DltBtn onClick={() => onRemove_dn(id)}>X</DltBtn>
     </DoneBox>
     );
 
