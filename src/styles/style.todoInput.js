@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TodoInputWrapper = styled.div`
+export const TodoInputWrapper = styled.form`
     width:400px;
     height:60px;
     background-color: rgba( 255, 255, 255, 0.8);

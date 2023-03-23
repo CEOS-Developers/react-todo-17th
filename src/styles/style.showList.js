@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TodoListWrapper = styled.div`
+export const ListWrapper = styled.div`
     display:flex;
     flex-direction: column;
     width:400px;
@@ -32,4 +32,12 @@ export const Separator = styled.hr`
     margin: 10px;
     border-bottom: 2px dashed #4d3d3d;
     background: #999;
+`
+
+export const TodoList = styled.ul`
+    line-style : none;
+`
+
+export const DoneList = styled.ul`
+    line-style : none;
 `

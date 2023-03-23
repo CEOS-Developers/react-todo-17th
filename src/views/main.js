@@ -1,25 +1,26 @@
 import {useState, useEffect } from 'react';
-import { Container, Title, Time} from '../styles/mainStyle';
+import { Container, Title, Time} from '../styles/style.main';
 import TodoInput from '../components/TodoInput';
-import TodoList from '../components/TodoList';
+import ShowList from '../components/ShowList';
 
 function Main() {
   const [time, setTime] = useState(new Date());
+  const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    const id = setInterval(() => {
+    const date = setInterval(() => {
       setTime(new Date());
     }, 1000);
-    return (() => clearInterval(id))
+    return (() => clearInterval(date))
   }, []);
   
   return (
     <Container>
       <Title>
-        <Time>{time.toLocaleTimeString()}</Time>
+        <Time>{time.toLocaleString()}</Time>
       </Title>
-      <TodoInput/>
-      <TodoList/>
+      <TodoInput todoList = {todoList} setTodoList = {setTodoList}/>
+      <ShowList todoList = {todoList} setTodoList = {setTodoList} />
     </Container>
   )
 }
