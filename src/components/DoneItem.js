@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import DoneItem from './DoneItem.js';
 
 
 const TextBox = styled.div`
@@ -12,7 +11,7 @@ const TextBox = styled.div`
     height: 27px;
     margin: 0;
 `
-const TodoBox = styled.div`
+const DoneBox = styled.div`
     position: relative;
     display: flex;
     width: 82%;
@@ -20,32 +19,29 @@ const TodoBox = styled.div`
     margin-left: 10%;
     margin-top: 1rem;
 `
-const ChkBtn = styled.div`
+const RtnBtn = styled.div`
     background-color: black;
-    border: 1px solid greenyellow;
+    border: 1px solid red;
     border-radius: 5%;
     height: 22px;
     width: 60px;
-    color : greenyellow;
+    color : red;
     font-size: 18px;
     font-weight: 100;
     margin-right: 25px;
     text-align: center;
 `
 
-const TodoItem = ({todo, onRemove, addDoneList})=>{
-    const {id, text} = todo;
-    const addDone = (text, id) =>{
-        onRemove(id);
-        return addDoneList(id, text)
-    }
+const DoneItem = ({done, onRemove_dn})=>{
+    const {id, text} = done;
+    
     return (
-    <TodoBox>
-        <ChkBtn onClick={() => {addDone(text, id)}}>완료</ChkBtn>
+    <DoneBox>
+        <RtnBtn onClick={() => onRemove_dn(id)}>완료</RtnBtn>
         <TextBox>{text}</TextBox>
-    </TodoBox>
+    </DoneBox>
     );
 
 }
 
-export default TodoItem;
+export default DoneItem;

@@ -3,19 +3,18 @@ import './App.css'
 import styled from 'styled-components';
 import TodoInput from "./components/TodoInput.js";
 import TodoList from "./components/TodoList.js";
+import DoneList from "./components/DoneList.js";
 
 let getId = 1;
 
 const Container = styled.div`
     background-color: black;
-    width: 70%;
-    margin-left: 15%;
-    margin-top : 10%;
-    height: 80vh;
+    width: 30rem;
+    margin: auto;
+    height: 50rem;
     border-style: solid;
     border-radius: 2%;
     border-color: white;
-    align-items: center;
 `
 
 const Title = styled.div`
@@ -44,6 +43,26 @@ const TodoTitle = styled. div`
     margin-bottom: 4px;
     display: flex;
 `
+const DoneTitle = styled. div`
+    width: 82%;
+    height: 30px;
+    color: white;
+    font-size: 25px;
+    text-align: left;
+    font-weight: 600;
+    margin-left : 10%;
+    margin-top : 1.5rem;
+    margin-bottom: 4px;
+    display: flex;
+`
+const TodoBox = styled.div`
+    position: relative;
+    width: 82%;
+    height: 30%;
+    margin-left: 3%;
+    margin-top: 1rem;
+`
+
 function App() {
   const [todos, setTodos] = useState([]);
   const addTodoList = (text) => {
@@ -59,6 +78,21 @@ function App() {
       getId++;
     }
   };
+  const [dones, setDones] = useState([]);
+  const addDoneList = (id, text) => {
+      const done = {
+        id,
+        text,
+        checked: false
+      }
+      setDones(dones => dones.concat(done));
+  }
+  const onRemove = id => {
+    setTodos(todos => todos.filter(todo => todo.id !==id))
+  }
+  const onRemove_dn = id =>{
+    setDones(dones => dones.filter(done => done.id !==id))
+  }
   return (
     <body>
       <Container>
@@ -67,7 +101,14 @@ function App() {
         addTodoList={addTodoList}
         />
         <TodoTitle>To-Do ({todos.length})</TodoTitle>
-        <TodoList todos={todos}/>
+        <TodoBox>
+          <TodoList todos={todos}
+                    onRemove={onRemove}
+                    addDoneList={addDoneList}/>
+        </TodoBox>
+        <DoneTitle>Done ({dones.length})</DoneTitle>
+        <DoneList dones={dones}
+                  onRemove_dn={onRemove_dn}/>
       </Container>
     </body>
   );
