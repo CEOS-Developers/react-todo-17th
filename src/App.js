@@ -5,8 +5,12 @@ import Todo from './components/Todo';
 import Done from './components/Done';
 import GlobalStyle from './styles/GloalStyle';
 
+const initialTodoData = localStorage.getItem('list')
+  ? JSON.parse(localStorage.getItem('list'))
+  : [];
+
 function App() {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(initialTodoData);
   const [value, setValue] = useState('');
 
   const getTodo = (todo) => {
@@ -16,18 +20,21 @@ function App() {
       completed: false,
     };
     setList([...list, newTodo]);
+    localStorage.setItem('list', JSON.stringify([...list, newTodo]));
   };
 
   const toggleTodo = (id) => {
-    setList(
-      list.map((data) =>
-        data.id === id ? { ...data, completed: !data.completed } : data
-      )
+    let toggledTodo = list.map((data) =>
+      data.id === id ? { ...data, completed: !data.completed } : data
     );
+    setList(toggledTodo);
+    localStorage.setItem('list', JSON.stringify(toggledTodo));
   };
 
   const deleteTodo = (id) => {
-    setList(list.filter((data) => data.id !== id));
+    let deletedTodo = list.filter((data) => data.id !== id);
+    setList(deletedTodo);
+    localStorage.setItem('list', JSON.stringify(deletedTodo));
   };
 
   let countTodo = 0;

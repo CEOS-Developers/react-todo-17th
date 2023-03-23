@@ -21,6 +21,7 @@ const Todo = ({ Todo, toggleTodo, deleteTodo, title, list, setList }) => {
 
     setList(editedTodo);
     setIsEditing(false);
+    localStorage.setItem('list', JSON.stringify(editedTodo));
   };
 
   if (isEditing) {
