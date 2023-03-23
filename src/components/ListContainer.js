@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { TODOKEY } from '../constants/TODOKEY';
 
 const ListContainer = ({ title, todoList, setTodoList, isDone }) => {
@@ -24,21 +25,21 @@ const ListContainer = ({ title, todoList, setTodoList, isDone }) => {
   };
 
   return (
-    <section className="section-todo">
-      <span className="list-title">{title}</span>
-      <div className="list-container">
+    <Wrapper>
+      <Title>{title}</Title>
+      <Lists>
         {todoList
           .filter((todo) => todo.isDone === isDone)
           .map((todo) => {
             return (
-              <div id={todo.time} key={todo.time}>
+              <SingleList id={todo.time} key={todo.time}>
                 <span onClick={toggleIsDone}>{todo.text}</span>
                 <button onClick={removeTodo}>🗑</button>
-              </div>
+              </SingleList>
             );
           })}
-      </div>
-    </section>
+      </Lists>
+    </Wrapper>
   );
 };
 
@@ -48,5 +49,47 @@ ListContainer.propTypes = {
   setTodoList: PropTypes.func,
   isDone: PropTypes.bool,
 };
+
+const Wrapper = styled.div`
+  height: 33%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Title = styled.span`
+  user-select: none;
+`;
+
+const Lists = styled.div`
+  padding: 0.6rem;
+  overflow: auto;
+`;
+
+const SingleList = styled.div`
+  width: 100%;
+  padding: 0.1rem 0;
+  display: flex;
+
+  &:hover {
+    border-radius: 0.3rem;
+    background-color: rgb(239, 239, 248);
+  }
+
+  span {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  button {
+    margin: 0 0 0 auto;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
 
 export default ListContainer;

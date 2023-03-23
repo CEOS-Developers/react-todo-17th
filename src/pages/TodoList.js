@@ -42,24 +42,23 @@ const TodoList = () => {
   };
 
   return (
-    <div>
-      <section className="section-title">
+    <Wrapper>
+      <Title>
         <span>Things To Do</span>
-      </section>
+      </Title>
 
-      <section className="section-input">
-        <div className="input-bg"></div>
+      <SectionInput>
         <input
-          className="input"
           type="text"
+          placeholder="type here ..."
           value={inputText}
           onChange={handleInputChange}
           onKeyDown={handleInputKeyDown}
         ></input>
-        <div onClick={submitInput}>+</div>
-      </section>
+        <span onClick={submitInput}>+</span>
+      </SectionInput>
 
-      <hr></hr>
+      <Hr></Hr>
 
       <ListContainer
         title={`📂 To Do (${numOfTodo})`}
@@ -68,7 +67,7 @@ const TodoList = () => {
         isDone={false}
       />
 
-      <hr></hr>
+      <Hr></Hr>
 
       <ListContainer
         title={`🎉 Done (${numOfDone})`}
@@ -76,8 +75,57 @@ const TodoList = () => {
         setTodoList={setTodoList}
         isDone={true}
       />
-    </div>
+    </Wrapper>
   );
 };
+
+let Wrapper = styled.div`
+  width: 20rem;
+  height: 30rem;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 20px rgb(125 123 125);
+  display: flex;
+  flex-direction: column;
+`;
+
+let Title = styled.div`
+  margin-bottom: 0.6rem;
+  font-size: 2rem;
+  user-select: none;
+`;
+
+let SectionInput = styled.div`
+  width: calc(100% - 20px);
+  height: 2rem;
+  margin: 0.6rem;
+  display: flex;
+
+  input {
+    width: 15rem;
+    height: 2rem;
+    background-color: lightgray;
+    border-color: transparent;
+    border-radius: 1rem;
+    padding: 0 1rem;
+
+    font-family: 'Pretendard-Regular';
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  span {
+    margin: auto 0 auto auto;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+`;
+
+let Hr = styled.hr`
+  margin: 1rem 0;
+`;
 
 export default TodoList;
