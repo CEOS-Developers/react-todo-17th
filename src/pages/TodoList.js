@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import ListContainer from '../components/ListContainer';
 
 const TodoList = () => {
   const [inputText, setInputText] = useState('');
@@ -35,24 +36,6 @@ const TodoList = () => {
     }
   };
 
-  const removeTodo = (e) => {
-    setTodoList(
-      todoList.filter((todo) => todo.time !== e.target.parentElement.id)
-    );
-    // @TODO - localStorage 연결
-  };
-
-  const toggleIsDone = (e) => {
-    const tempList = [...todoList];
-    tempList.forEach((todo) => {
-      if (todo.time === e.target.parentElement.id) {
-        todo.isDone = !todo.isDone;
-      }
-    });
-    setTodoList(tempList);
-    // @TODO - localStorage 연결
-  };
-
   return (
     <div>
       <section className="section-title">
@@ -73,39 +56,21 @@ const TodoList = () => {
 
       <hr></hr>
 
-      <section className="section-todo">
-        <span className="list-title">{`📂 To Do (${numOfTodo})`}</span>
-        <div className="list-container">
-          {todoList
-            .filter((todo) => !todo.isDone)
-            .map((todo) => {
-              return (
-                <div id={todo.time} key={todo.time}>
-                  <span onClick={toggleIsDone}>{todo.text}</span>
-                  <button onClick={removeTodo}>🗑</button>
-                </div>
-              );
-            })}
-        </div>
-      </section>
+      <ListContainer
+        title={`📂 To Do (${numOfTodo})`}
+        todoList={todoList}
+        setTodoList={setTodoList}
+        isDone={false}
+      />
 
       <hr></hr>
 
-      <section className="section-done">
-        <span className="list-title">{`🎉 Done (${numOfDone})`}</span>
-        <div className="list-container">
-          {todoList
-            .filter((todo) => todo.isDone)
-            .map((todo) => {
-              return (
-                <div id={todo.time} key={todo.time}>
-                  <span onClick={toggleIsDone}>{todo.text}</span>
-                  <button onClick={removeTodo}>🗑</button>
-                </div>
-              );
-            })}
-        </div>
-      </section>
+      <ListContainer
+        title={`🎉 Done (${numOfDone})`}
+        todoList={todoList}
+        setTodoList={setTodoList}
+        isDone={true}
+      />
     </div>
   );
 };
