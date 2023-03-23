@@ -22,7 +22,11 @@ const TodoList = () => {
 
   const submitInput = () => {
     if (inputText.trim()) {
-      setTodoLists([...todoLists, inputText]);
+      const todoObj = {
+        text: inputText,
+        time: String(Date.now()),
+      };
+      setTodoLists([...todoLists, todoObj]);
       setInputText('');
       // @TODO - localStorage.setItem 연결
     }
@@ -32,6 +36,16 @@ const TodoList = () => {
     if (e.key === 'Enter') {
       submitInput();
     }
+  };
+
+  const removeTodo = (e) => {
+    setTodoLists(
+      todoLists.filter((todo) => todo.time !== e.target.parentElement.id)
+    );
+    setDoneLists(
+      doneLists.filter((todo) => todo.time !== e.target.parentElement.id)
+    );
+    // @TODO - localStorage 연결
   };
 
   return (
@@ -57,11 +71,11 @@ const TodoList = () => {
       <section className="section-todo">
         <span className="list-title">{`📂 To Do (${numOfTodo})`}</span>
         <div className="list-container">
-          {todoLists.map((todo, idx) => {
+          {todoLists.map((todo) => {
             return (
-              <div key={idx}>
-                <span>{todo}</span>
-                <button>🗑</button>
+              <div id={todo.time} key={todo.time}>
+                <span>{todo.text}</span>
+                <button onClick={removeTodo}>🗑</button>
               </div>
             );
           })}
@@ -73,11 +87,11 @@ const TodoList = () => {
       <section className="section-done">
         <span className="list-title">{`🎉 Done (${numOfDone})`}</span>
         <div className="list-container">
-          {doneLists.map((todo, idx) => {
+          {doneLists.map((todo) => {
             return (
-              <div key={idx}>
-                <span>{todo}</span>
-                <button>🗑</button>
+              <div id={todo.time} key={todo.time}>
+                <span>{todo.text}</span>
+                <button onClick={removeTodo}>🗑</button>
               </div>
             );
           })}
