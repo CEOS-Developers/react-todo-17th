@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TodoInput from "./components/TodoInput.js";
 import TodoList from "./components/TodoList.js";
 import DoneList from "./components/DoneList.js";
-
+import {AiOutlineReload} from 'react-icons/ai';
 let getId = 1;
 
 const Container = styled.div`
@@ -71,6 +71,20 @@ const DoneBox = styled.div`
     margin-left: 8%;
     margin-top: 1rem;
 `
+const TodoRldBtn = styled.button`
+    margin-left: 50%;
+    border: none;
+    width: 60px;
+    font-size : 25px;
+    background-color : black;
+`
+const DoneRldBtn = styled.button`
+    margin-left: 50%;
+    border: none;
+    width: 60px;
+    font-size : 25px;
+    background-color : black;
+`
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -109,13 +123,13 @@ function App() {
         <TodoInput
         addTodoList={addTodoList}
         />
-        <TodoTitle>To-Do ({todos.length})</TodoTitle>
+        <TodoTitle>To-Do ({todos.length})<TodoRldBtn onClick = {() => {setTodos([])}}>🔄</TodoRldBtn></TodoTitle>
         <TodoBox>
           <TodoList todos={todos}
                     onRemove={onRemove}
                     addDoneList={addDoneList}/>
         </TodoBox>
-        <DoneTitle>Done ({dones.length})</DoneTitle>
+        <DoneTitle>Done ({dones.length})<DoneRldBtn onClick = {() => {setDones([])}}>🔄</DoneRldBtn></DoneTitle>
         <DoneBox>
           <DoneList dones={dones}
                     onRemove_dn={onRemove_dn}
