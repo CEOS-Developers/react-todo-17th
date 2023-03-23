@@ -3,18 +3,14 @@ import styled from 'styled-components';
 
 const TodoList = () => {
   const [inputText, setInputText] = useState('');
-  const [todoLists, setTodoLists] = useState([]); // @TODO - localStorage.getItem 연결
-  const [doneLists, setDoneLists] = useState([]); // @TODO - localStorage.getItem 연결
+  const [todoList, setTodoList] = useState([]); // @TODO - localStorage.getItem 연결
   const [numOfTodo, setNumOfTodo] = useState(0);
   const [numOfDone, setNumOfDone] = useState(0);
 
   useEffect(() => {
-    setNumOfTodo(todoLists.length);
-  }, [todoLists]);
-
-  useEffect(() => {
-    setNumOfDone(doneLists.length);
-  }, [doneLists]);
+    setNumOfTodo(todoList.filter((todo) => !todo.isDone).length);
+    setNumOfDone(todoList.filter((todo) => todo.isDone).length);
+  }, [todoList]);
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
@@ -30,45 +26,30 @@ const TodoList = () => {
     if (inputText.trim()) {
       const todoObj = {
         text: inputText, // string
-        time: String(Date.now()), // string
+        time: String(Date.now()), // string,
+        isDone: false,
       };
-      setTodoLists([...todoLists, todoObj]);
+      setTodoList([...todoList, todoObj]);
       setInputText('');
       // @TODO - localStorage.setItem 연결
     }
   };
 
   const removeTodo = (e) => {
-    setTodoLists(
-      todoLists.filter((todo) => todo.time !== e.target.parentElement.id)
-    );
-    setDoneLists(
-      doneLists.filter((todo) => todo.time !== e.target.parentElement.id)
+    setTodoList(
+      todoList.filter((todo) => todo.time !== e.target.parentElement.id)
     );
     // @TODO - localStorage 연결
   };
 
-  const moveToDone = (e) => {
-    const todoObj = {
-      text: e.target.innerText,
-      time: e.target.parentElement.id,
-    };
-    setTodoLists(
-      todoLists.filter((todo) => todo.time !== e.target.parentElement.id)
-    );
-    setDoneLists([...doneLists, todoObj]);
-    // @TODO - localStorage 연결
-  };
-
-  const moveToTodo = (e) => {
-    const todoObj = {
-      text: e.target.innerText,
-      time: e.target.parentElement.id,
-    };
-    setDoneLists(
-      doneLists.filter((todo) => todo.time !== e.target.parentElement.id)
-    );
-    setTodoLists([...todoLists, todoObj]);
+  const toggleIsDone = (e) => {
+    const tempList = [...todoList];
+    tempList.forEach((todo) => {
+      if (todo.time === e.target.parentElement.id) {
+        todo.isDone = !todo.isDone;
+      }
+    });
+    setTodoList(tempList);
     // @TODO - localStorage 연결
   };
 
@@ -95,14 +76,16 @@ const TodoList = () => {
       <section className="section-todo">
         <span className="list-title">{`📂 To Do (${numOfTodo})`}</span>
         <div className="list-container">
-          {todoLists.map((todo) => {
-            return (
-              <div id={todo.time} key={todo.time}>
-                <span onClick={moveToDone}>{todo.text}</span>
-                <button onClick={removeTodo}>🗑</button>
-              </div>
-            );
-          })}
+          {todoList
+            .filter((todo) => !todo.isDone)
+            .map((todo) => {
+              return (
+                <div id={todo.time} key={todo.time}>
+                  <span onClick={toggleIsDone}>{todo.text}</span>
+                  <button onClick={removeTodo}>🗑</button>
+                </div>
+              );
+            })}
         </div>
       </section>
 
@@ -111,14 +94,16 @@ const TodoList = () => {
       <section className="section-done">
         <span className="list-title">{`🎉 Done (${numOfDone})`}</span>
         <div className="list-container">
-          {doneLists.map((todo) => {
-            return (
-              <div id={todo.time} key={todo.time}>
-                <span onClick={moveToTodo}>{todo.text}</span>
-                <button onClick={removeTodo}>🗑</button>
-              </div>
-            );
-          })}
+          {todoList
+            .filter((todo) => todo.isDone)
+            .map((todo) => {
+              return (
+                <div id={todo.time} key={todo.time}>
+                  <span onClick={toggleIsDone}>{todo.text}</span>
+                  <button onClick={removeTodo}>🗑</button>
+                </div>
+              );
+            })}
         </div>
       </section>
     </div>
