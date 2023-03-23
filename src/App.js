@@ -1,8 +1,21 @@
+import React from "react";
+import { GlobalStyle } from "./GlobalStyle";
+
 function App() {
   return (
-    <div>
-      <h1>17기 프론트 화이팅~ 우하하</h1>
-    </div>
+    <Wrapper>
+      <GlobalStyle/>
+      <Container>
+        <InsertBox
+
+        />
+        <ListBox
+        
+        />
+        <ListBox
+        />
+      </Container>
+    </Wrapper>
   );
 }
 
