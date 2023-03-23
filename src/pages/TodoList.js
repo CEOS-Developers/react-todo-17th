@@ -20,21 +20,21 @@ const TodoList = () => {
     setInputText(e.target.value);
   };
 
+  const handleInputKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      submitInput();
+    }
+  };
+
   const submitInput = () => {
     if (inputText.trim()) {
       const todoObj = {
-        text: inputText,
-        time: String(Date.now()),
+        text: inputText, // string
+        time: String(Date.now()), // string
       };
       setTodoLists([...todoLists, todoObj]);
       setInputText('');
       // @TODO - localStorage.setItem 연결
-    }
-  };
-
-  const handleInputKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      submitInput();
     }
   };
 
@@ -45,6 +45,30 @@ const TodoList = () => {
     setDoneLists(
       doneLists.filter((todo) => todo.time !== e.target.parentElement.id)
     );
+    // @TODO - localStorage 연결
+  };
+
+  const moveToDone = (e) => {
+    const todoObj = {
+      text: e.target.innerText,
+      time: e.target.parentElement.id,
+    };
+    setTodoLists(
+      todoLists.filter((todo) => todo.time !== e.target.parentElement.id)
+    );
+    setDoneLists([...doneLists, todoObj]);
+    // @TODO - localStorage 연결
+  };
+
+  const moveToTodo = (e) => {
+    const todoObj = {
+      text: e.target.innerText,
+      time: e.target.parentElement.id,
+    };
+    setDoneLists(
+      doneLists.filter((todo) => todo.time !== e.target.parentElement.id)
+    );
+    setTodoLists([...todoLists, todoObj]);
     // @TODO - localStorage 연결
   };
 
@@ -74,7 +98,7 @@ const TodoList = () => {
           {todoLists.map((todo) => {
             return (
               <div id={todo.time} key={todo.time}>
-                <span>{todo.text}</span>
+                <span onClick={moveToDone}>{todo.text}</span>
                 <button onClick={removeTodo}>🗑</button>
               </div>
             );
@@ -90,7 +114,7 @@ const TodoList = () => {
           {doneLists.map((todo) => {
             return (
               <div id={todo.time} key={todo.time}>
-                <span>{todo.text}</span>
+                <span onClick={moveToTodo}>{todo.text}</span>
                 <button onClick={removeTodo}>🗑</button>
               </div>
             );
