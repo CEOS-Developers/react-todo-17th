@@ -2,29 +2,35 @@ import {ListWrapper, Todo, Done, SubTitle, Separator, TodoList, DoneList} from '
 import ListItem from './ListItem';
 
 function ShowList({todoList, setTodoList}) {
-  const filteredTodoList = todoList.filter((item) => item.isDone === false);
-  const filteredDoneList = todoList.filter((item) => item.isDone === true);
+  const filteredTodoList = todoList ? todoList.filter((item) => item.isDone === false) : [];
+  const filteredDoneList = todoList ? todoList.filter((item) => item.isDone === true) : [];
   return (
     <ListWrapper>
       <Todo>
         <SubTitle>To Do ! : 0</SubTitle>
         <TodoList>
-          <ListItem
+          {filteredTodoList.map((todoItem) => (
+            <ListItem
             todoList = {todoList}
             setTodoList = {setTodoList}
-            List = {filteredTodoList}
+            item = {todoItem}
+            key = {todoItem.id}
           />
+          ))}
         </TodoList>
       </Todo>
       <Separator/>
       <Done>
         <SubTitle>Done ! : 0</SubTitle>
         <DoneList>
-          <ListItem
+          {filteredDoneList.map((doneItem) => (
+            <ListItem
             todoList = {todoList}
             setTodoList = {setTodoList}
-            List = {filteredDoneList}
+            item = {doneItem}
+            key = {doneItem.id}
           />
+          ))}
         </DoneList>
       </Done>
     </ListWrapper>
