@@ -5,8 +5,14 @@ export const ItemWrapper = styled.li`
     line-height: 25px;
     cursor : pointer;
     padding:10px;
+    word-break: break-all;
+    border-bottom: 1px solid rgb(121 121 121);
     &:hover button{
         opacity : 1;
+    }
+    &:before{
+        content : ">";
+        margin-right:2px;
     }
 `
 
