@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import TodoInput from "./components/TodoInput.js";
 import TodoList from "./components/TodoList.js";
 import DoneList from "./components/DoneList.js";
-import {AiOutlineReload} from 'react-icons/ai';
 let getId = 1;
 
 const Container = styled.div`
@@ -116,6 +115,44 @@ function App() {
   const onRemove_dn = id =>{
     setDones(dones => dones.filter(done => done.id !==id))
   }
+// const [virtuals, setVirtuals] = useState([]);
+//   const virtualList = (id, text, checked) =>{
+//     const virtual = {
+//       id,
+//       text,
+//       checked
+//     }
+//     setVirtuals(virtuals => virtuals.concat(virtual));
+//   }
+
+  const onChecked = (id) =>{
+    setTodos(todos => 
+      todos.map(todo => 
+        todo.id===id ? {...todo, checked: !todo.checked} : todo,
+      )
+    );
+  //  reArray(todos);
+   
+
+
+  };
+
+  const reArray = (todos) =>{
+  //  const virtuals = todos;
+  //  setVirtuals(virtuals => virtuals.filter(virtual=> virtual.checked !==true))
+  //  console.log(virtuals);
+  //  setTodos(todos => todos.filter(todo => todo.checked !== false))
+  //  console.log(todos);
+  //  setTodos(todos => 
+  //    todos.map(todo => 
+  //      todo.checked===true ? {...todo, id: id+5} : todo,
+  //    )
+  //  );
+  //  setTodos(todos => todos.concat(virtuals))
+  //  console.log(todos);
+  //  setVirtuals([])
+  }
+
   return (
     <body>
       <Container>
@@ -127,7 +164,8 @@ function App() {
         <TodoBox>
           <TodoList todos={todos}
                     onRemove={onRemove}
-                    addDoneList={addDoneList}/>
+                    addDoneList={addDoneList}
+                    onChecked = {onChecked}/>
         </TodoBox>
         <DoneTitle>Done ({dones.length})<DoneRldBtn onClick = {() => {setDones([])}}>🔄</DoneRldBtn></DoneTitle>
         <DoneBox>

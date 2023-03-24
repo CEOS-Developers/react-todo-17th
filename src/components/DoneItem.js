@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const TextBox = styled.div`
     width: 100%;
     border-color: white;
@@ -14,7 +13,7 @@ const TextBox = styled.div`
 const DoneBox = styled.div`
     position: relative;
     display: flex;
-    width: 82%;
+    width: 90%;
     margin-left: 10%;
     margin-top: 0.7rem;
 `
@@ -39,6 +38,7 @@ const DltBtn = styled.div`
     color : white;
     font-size: 20px;
     font-weight: medium;
+    margin-left : 10px;
 `
 
 const DoneItem = ({done, onRemove_dn, addTodoList})=>{

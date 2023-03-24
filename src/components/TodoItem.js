@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import DoneItem from './DoneItem.js';
+import {MdCheckBoxOutlineBlank} from "react-icons/md";
+import {BsSquareFill} from "react-icons/bs";
 
 
 const TextBox = styled.div`
@@ -15,7 +16,7 @@ const TextBox = styled.div`
 const TodoBox = styled.div`
     position: relative;
     display: flex;
-    width: 82%;
+    width: 90%;
     margin-left: 10%;
     margin-top: 0.7rem;
 `
@@ -40,10 +41,17 @@ const DltBtn = styled.div`
     color : white;
     font-size: 20px;
     font-weight: medium;
+    margin-left : 10px;
+`
+const RedBox = styled.div`
+    color : red;
+    height: 25px;
+    width : 25px;
+    border: 1px white;
 `
 
-const TodoItem = ({todo, onRemove, addDoneList})=>{
-    const {id, text} = todo;
+const TodoItem = ({todo, onRemove, addDoneList, onChecked})=>{
+    const {id, text, checked} = todo;
     const addDone = (text, id) =>{
         onRemove(id);
         return addDoneList(id, text)
@@ -52,6 +60,18 @@ const TodoItem = ({todo, onRemove, addDoneList})=>{
     <TodoBox>
         <ChkBtn onClick={() => {addDone(text, id)}}>완료</ChkBtn>
         <TextBox>{text}</TextBox>
+        <RedBox>{checked ? (
+            <BsSquareFill 
+                onClick={()=>{
+                    onChecked(id);
+                }}
+            /> 
+        ): (<MdCheckBoxOutlineBlank
+        onClick={() => {
+            onChecked(id);
+        }}
+        />
+    )}</RedBox>
         <DltBtn onClick={() => onRemove(id)}>X</DltBtn>
     </TodoBox>
     );
