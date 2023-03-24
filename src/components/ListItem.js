@@ -4,10 +4,9 @@ import {useState,useEffect,useRef} from 'react';
 function ListItem({todoList, setTodoList, item}){
     const {id,value,isDone, ...rest} = item;
     const [edited , setEdited] = useState(false);
-    const [newText, setNewTest] = useState(value); // 새로운 아이템 내용
+    const [newText, setNewText] = useState(value);
     const editInputRef = useRef(null);
     useEffect(() => {
-      // edit 모드일때 포커싱을 한다.
       if (edited) {
         editInputRef.current.focus();
       }
@@ -26,7 +25,7 @@ function ListItem({todoList, setTodoList, item}){
       setEdited(true);
     };
     const onChangeEditInput = (e) => {
-      setNewTest(e.target.value);
+      setNewText(e.target.value);
     };
     const onClickSubmitButton = () => {
       setTodoList(
