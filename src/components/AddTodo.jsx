@@ -52,6 +52,7 @@ const AddInput = styled.input`
 
   &::placeholder {
     text-align: center;
+    font-family: 'S-CoreDream-3Light';
   }
 `;
 

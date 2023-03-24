@@ -49,6 +49,7 @@ const FilterBtn = styled.button`
 
   height: 3rem;
   font-size: 1rem;
+  font-family: 'S-CoreDream-3Light';
 
   background-color: transparent;
   border-right: 1px solid rgb(199, 199, 199);

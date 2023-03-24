@@ -65,6 +65,7 @@ const ClearBtn = styled.button`
   height: 2rem;
   border-radius: 1rem;
   font-size: 0.9rem;
+  font-family: 'S-CoreDream-3Light';
 
   transition: all 150ms ease-out;
 

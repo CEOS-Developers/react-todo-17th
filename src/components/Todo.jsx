@@ -82,6 +82,7 @@ const EditInput = styled.input`
   margin-left: 0.6rem;
   padding: 0;
   font-size: 1.08rem;
+  font-family: 'S-CoreDream-3Light';
 
   outline: none;
   border: none;
