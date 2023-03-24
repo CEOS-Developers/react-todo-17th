@@ -20,7 +20,26 @@ export const ItemText = styled.span`
     flex:1;
 `
 
-export const ItemButton = styled.button`
+export const ItemCorrectionInput = styled.input`
+    flex:1;
+`
+export const ItemDeleteButton = styled.button`
+    background-color:transparent;
+    border : none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    cursor : pointer;
+`
+
+export const ItemCorrectionSubmitButton = styled.button`
+    background-color:transparent;
+    border : none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    cursor : pointer;
+`
+
+export const ItemCorrectionButton = styled.button`
     background-color:transparent;
     border : none;
     opacity: 0;
