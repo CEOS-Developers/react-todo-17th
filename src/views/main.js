@@ -4,8 +4,9 @@ import TodoInput from '../components/TodoInput';
 import ShowList from '../components/ShowList';
 
 function Main() {
+  let toDoString = localStorage.getItem("todoObject") ? JSON.parse(localStorage.getItem("todoObject")) : [];
   const [time, setTime] = useState(new Date());
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(toDoString);
 
   useEffect(() => {
     const date = setInterval(() => {
@@ -13,6 +14,10 @@ function Main() {
     }, 1000);
     return (() => clearInterval(date))
   }, []);
+
+  useEffect(()=>{
+    localStorage.setItem("todoObject",JSON.stringify(todoList));
+  }, [todoList])
   
   return (
     <Container>

@@ -7,7 +7,7 @@ function ShowList({todoList, setTodoList}) {
   return (
     <ListWrapper>
       <Todo>
-        <SubTitle>To Do ! : 0</SubTitle>
+        <SubTitle>To Do ! : {filteredTodoList.length}</SubTitle>
         <TodoList>
           {filteredTodoList.map((todoItem) => (
             <ListItem
@@ -21,7 +21,7 @@ function ShowList({todoList, setTodoList}) {
       </Todo>
       <Separator/>
       <Done>
-        <SubTitle>Done ! : 0</SubTitle>
+        <SubTitle>Done ! : {filteredDoneList.length}</SubTitle>
         <DoneList>
           {filteredDoneList.map((doneItem) => (
             <ListItem
