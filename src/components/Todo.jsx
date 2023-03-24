@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const Todo = ({ todo, onDelete, onUpdate }) => {
   const [editing, setIsEditing] = useState(false);
@@ -26,32 +27,90 @@ const Todo = ({ todo, onDelete, onUpdate }) => {
     });
 
   return (
-    <div>
-      <li key={todo.id}>
-        <input
-          type="checkbox"
-          id="checkbox"
-          checked={todo.status === 'done'}
-          onChange={handleCheckboxChange}
+    <TodoItem key={todo.id}>
+      <Checkbox
+        type="checkbox"
+        id="checkbox"
+        checked={todo.status === 'done'}
+        onChange={handleCheckboxChange}
+      />
+
+      {editing ? (
+        <EditInput
+          type="text"
+          value={newText}
+          onChange={handleInputChange}
+          required
         />
+      ) : (
+        <TodoText for="checkbox">{todo.text}</TodoText>
+      )}
 
+      <BtnBox>
         {editing ? (
-          <input type="text" value={newText} onChange={handleInputChange} />
+          <EditCompleteBtn onClick={handleEditCompleteBtnClick}>
+            ✅
+          </EditCompleteBtn>
         ) : (
-          <label for="checkbox">{todo.text}</label>
+          <EditBtn onClick={handleEditBtnClick}>✍</EditBtn>
         )}
-
-        <span>
-          {editing ? (
-            <button onClick={handleEditCompleteBtnClick}>✅</button>
-          ) : (
-            <button onClick={handleEditBtnClick}>✍</button>
-          )}
-          <button onClick={handleDeleteBtnClick}>❌</button>
-        </span>
-      </li>
-    </div>
+        <DeleteBtn onClick={handleDeleteBtnClick}>❌</DeleteBtn>
+      </BtnBox>
+    </TodoItem>
   );
 };
+
+const TodoItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Checkbox = styled.input`
+  width: 0.9rem;
+  height: 0.9rem;
+`;
+
+const TodoText = styled.label`
+  flex: 1 1 0%;
+  margin-left: 0.6rem;
+  font-size: 1.08rem;
+`;
+
+const EditInput = styled.input`
+  flex: 1 1 0%;
+  margin-left: 0.6rem;
+  padding: 0;
+  font-size: 1.08rem;
+
+  outline: none;
+  border: none;
+  border-bottom: 2px solid rgb(199, 199, 199);
+`;
+
+const BtnBox = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const EditBtn = styled.button`
+  background-color: transparent;
+
+  padding: 0 0.4rem;
+  padding-bottom: 0.3rem;
+`;
+
+const EditCompleteBtn = styled.button`
+  background-color: transparent;
+
+  padding: 0 0.4rem;
+`;
+
+const DeleteBtn = styled.button`
+  background-color: transparent;
+
+  padding: 0 0.4rem;
+`;
 
 export default Todo;

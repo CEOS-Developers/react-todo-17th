@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import AddTodo from './components/AddTodo';
 import Filter from './components/Filter';
 import TodoList from './components/TodoList';
@@ -37,8 +38,8 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>TO-DO LIST</h1>
+    <>
+      <Title>TO-DO LIST</Title>
       <AddTodo onAdd={onAdd} />
       <Filter filters={filters} onChangeFilter={onChangeFilter} todos={todos} />
       <TodoList
@@ -46,9 +47,30 @@ function App() {
         onUpdate={onUpdate}
         filteredTodos={filteredTodos}
       />
-      <button onClick={() => setTodos([])}>CLEAR ALL</button>
-    </div>
+      <ClearBtn onClick={() => setTodos([])}>CLEAR ALL</ClearBtn>
+    </>
   );
 }
+
+const Title = styled.h1`
+  text-align: center;
+  margin: 0;
+  margin-top: 1rem;
+`;
+
+const ClearBtn = styled.button`
+  align-self: center;
+
+  width: 7.5rem;
+  height: 2rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+
+  transition: all 150ms ease-out;
+
+  &:hover {
+    background-color: #514e4b23;
+  }
+`;
 
 export default App;
