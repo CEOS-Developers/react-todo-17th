@@ -1,8 +1,180 @@
+import {React, useState} from 'react'
+import './App.css'
+import styled from 'styled-components';
+import TodoInput from "./components/TodoInput.js";
+import TodoList from "./components/TodoList.js";
+import DoneList from "./components/DoneList.js";
+let getId = 1;
+
+const Container = styled.div`
+    background-color: black;
+    width: 30rem;
+    margin: auto;
+    height: 50rem;
+    border-style: solid;
+    border-radius: 2%;
+    border-color: white;
+`
+
+const Title = styled.div`
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    height: 5vh;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 800;
+
+    border-bottom: solid;
+    border-radius: 2%;
+`
+
+const TodoTitle = styled. div`
+    width: 82%;
+    height: 32px;
+    color: white;
+    font-size: 28px;
+    text-align: left;
+    font-weight: bold;
+    margin-left : 15%;
+    margin-top : 1.5rem;
+    margin-bottom: 4px;
+    display: flex;
+`
+const DoneTitle = styled. div`
+    width: 82%;
+    height: 32px;
+    color: white;
+    font-size: 28px;
+    text-align: left;
+    font-weight: bold;
+    margin-left : 15%;
+    margin-top : 1.5rem;
+    margin-bottom: 4px;
+    display: flex;
+`
+const TodoBox = styled.div`
+    position: relative;
+    width: 82%;
+    height: 30%;
+    margin-left: 8%;
+    margin-top: 1rem;
+`
+
+const DoneBox = styled.div`
+    position: relative;
+    width: 82%;
+    height: 30%;
+    margin-left: 8%;
+    margin-top: 1rem;
+`
+const TodoRldBtn = styled.button`
+    margin-left: 50%;
+    border: none;
+    width: 60px;
+    font-size : 25px;
+    background-color : black;
+`
+const DoneRldBtn = styled.button`
+    margin-left: 50%;
+    border: none;
+    width: 60px;
+    font-size : 25px;
+    background-color : black;
+`
+
 function App() {
+  const [todos, setTodos] = useState([]);
+  const addTodoList = (text) => {
+    if (text === ""){ //trim 나중에 적용시키기
+      return alert("입력된 내용이 없습니다.");
+    } else{
+      const todo = {
+        id: getId,
+        text,
+        checked: false
+      }
+      setTodos(todos => todos.concat(todo));
+      getId++;
+    }
+  };
+  const [dones, setDones] = useState([]);
+  const addDoneList = (id, text) => {
+      const done = {
+        id,
+        text,
+        checked: false
+      }
+      setDones(dones => dones.concat(done));
+  }
+  const onRemove = id => {
+    setTodos(todos => todos.filter(todo => todo.id !==id))
+  }
+  const onRemove_dn = id =>{
+    setDones(dones => dones.filter(done => done.id !==id))
+  }
+// const [virtuals, setVirtuals] = useState([]);
+//   const virtualList = (id, text, checked) =>{
+//     const virtual = {
+//       id,
+//       text,
+//       checked
+//     }
+//     setVirtuals(virtuals => virtuals.concat(virtual));
+//   }
+
+  const onChecked = (id) =>{
+    setTodos(todos => 
+      todos.map(todo => 
+        todo.id===id ? {...todo, checked: !todo.checked} : todo,
+      )
+    );
+  //  reArray(todos);
+   
+
+
+  };
+
+  const reArray = (todos) =>{
+  //  const virtuals = todos;
+  //  setVirtuals(virtuals => virtuals.filter(virtual=> virtual.checked !==true))
+  //  console.log(virtuals);
+  //  setTodos(todos => todos.filter(todo => todo.checked !== false))
+  //  console.log(todos);
+  //  setTodos(todos => 
+  //    todos.map(todo => 
+  //      todo.checked===true ? {...todo, id: id+5} : todo,
+  //    )
+  //  );
+  //  setTodos(todos => todos.concat(virtuals))
+  //  console.log(todos);
+  //  setVirtuals([])
+  }
+
   return (
-    <div>
-      <h1>17기 프론트 화이팅~ 우하하</h1>
-    </div>
+    <body>
+      <Container>
+        <Title>T O - D O &ensp;L I S T</Title>
+        <TodoInput
+        addTodoList={addTodoList}
+        />
+        <TodoTitle>To-Do ({todos.length})<TodoRldBtn onClick = {() => {setTodos([])}}>🔄</TodoRldBtn></TodoTitle>
+        <TodoBox>
+          <TodoList todos={todos}
+                    onRemove={onRemove}
+                    addDoneList={addDoneList}
+                    onChecked = {onChecked}/>
+        </TodoBox>
+        <DoneTitle>Done ({dones.length})<DoneRldBtn onClick = {() => {setDones([])}}>🔄</DoneRldBtn></DoneTitle>
+        <DoneBox>
+          <DoneList dones={dones}
+                    onRemove_dn={onRemove_dn}
+                    addTodoList={addTodoList}/>
+        </DoneBox>
+      </Container>
+    </body>
   );
 }
 
