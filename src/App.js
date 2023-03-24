@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { GlobalStyle } from "./GlobalStyle";
-import { useState } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import InsertBox from "./component/InsertBox";
 import ListBox from "./component/ListBox";
 
@@ -19,9 +19,12 @@ const Container = styled.div`{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 30vw;
+  width: 300px;
   height: 700px;
   padding: 30px;
+  justify-content: center;
+  background-color:rgb(3, 3, 36);
+  color: rgb(255, 77, 71);
 }`;
 
 const Title = styled.h1`{
@@ -30,8 +33,8 @@ const Title = styled.h1`{
 
 
 function App() {
-  //todos는 현재 들어온 할 일, setTodos는 이를 갱신하는 역할의 함수
-  const [toDos, setTodos] = useState([
+  //toDos는 현재 들어온 할 일, setToDos는 이를 갱신하는 역할의 함수
+  const [toDos, setToDos] = useState([
     {
       id: 1,
       text: '알고리즘 과제 마무리하기',
@@ -44,28 +47,28 @@ function App() {
     },
   ]);
 
-  const doings = todo.filter((todo) => !todo.checked);
-  const dones = todo.filter((todo) => todo.checked);
+  const doings = toDos.filter((todo) => !todo.checked);
+  const dones = toDos.filter((todo) => todo.checked);
 
   //todo 추가하기
   const nextId = useRef(3);
-    const onInsert = useCallback(
-      (text) => {
-        const todo = {
-          id: nextId.current,
-          text,
-          checked: false,
-        };
-        setTodos(todos.concat(todo)); //todos에 todo 추가!
-        nextId.current++; //nextId 1씩 더하기
+  const onInsert = useCallback(
+    (text) => {
+      const todo = {
+        id: nextId.current,
+        text,
+        checked: false,
+      };
+      setToDos(toDos.concat(todo)); //toDos에 todo 추가!
+      nextId.current++; //nextId 1씩 더하기
      },
-    [toDos],
+    [toDos]
   );
 
-  //todo 삭제하기 - id를 받아 todos에서 해당 id 항목을 제외한 todos 반환
+  //todo 삭제하기 - id를 받아 toDos에서 해당 id 항목을 제외한 toDos 반환
   const onDelete = useCallback(
     (id) => {
-      setTodos(todos.filter(todo => todo.id !== id));
+      setToDos(toDos.filter(todo => todo.id !== id));
     },
     [toDos],
   );
@@ -73,9 +76,13 @@ function App() {
   //todo 완료했을 때
   const onFinish = useCallback(
     (id) => {
-      setTodos(todos.map(todo => todo.id === id ? {... todo, checked: !todo.checked} : todo,),);
+      setToDos(
+        toDos && toDos.map((todo) =>
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo
+        )
+      );
     },
-    [todos],
+    [toDos]
   );
 
   return (
@@ -83,13 +90,20 @@ function App() {
       <GlobalStyle/>
       <Container>
         <Title>To Do List</Title>
-        <InsertBox
-
-        />
+        <InsertBox onInsert={onInsert}/>
         <ListBox
-        
+          type="doing"
+          title="🔥 해보자고!"
+          toDos={doings}
+          onDelete={onDelete}
+          onCheck={onFinish}
         />
-        <ListBox
+        <ListBox          
+          type="dones"
+          title="📌 완료한 일들"
+          toDos={dones}
+          onDelete={onDelete}
+          onCheck={onFinish}
         />
       </Container>
     </Wrapper>
