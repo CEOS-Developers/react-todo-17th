@@ -11,7 +11,7 @@ function App() {
   //삭제 버튼 눌러서 todo를 삭제
   const onDelete = (deletedTodo) =>
     setTodos(todos.filter((t) => t.id !== deletedTodo.id));
-  //체크하거나 체크 해제하면 todo의 status가 바뀜(doing<->done)
+  //todo의 text와 status(doing<->done) 수정
   const onUpdate = (updatedTodo) =>
     setTodos(todos.map((t) => (t.id === updatedTodo.id ? updatedTodo : t)));
 

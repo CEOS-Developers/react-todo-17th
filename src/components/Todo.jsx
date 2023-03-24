@@ -4,7 +4,10 @@ const Todo = ({ todo, onDelete, onUpdate }) => {
   const [editing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(todo.text);
 
-  const handleEditBtnClick = () => setIsEditing(true);
+  const handleEditBtnClick = () => {
+    setIsEditing(true);
+    setNewText(todo.text);
+  };
   const handleInputChange = (e) => setNewText(e.target.value);
   const handleEditCompleteBtnClick = () => {
     onUpdate({
