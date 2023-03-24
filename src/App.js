@@ -1,8 +1,11 @@
+import GlobalStyle from './styles/GlobalStyle';
+import Main from './views/main.js';
 function App() {
   return (
-    <div>
-      <h1>17기 프론트 화이팅~ 우하하</h1>
-    </div>
+    <>
+      <GlobalStyle/>
+      <Main/>
+    </>
   );
 }
 
