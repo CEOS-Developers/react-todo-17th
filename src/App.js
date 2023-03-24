@@ -12,7 +12,7 @@ function App() {
   const onDelete = (deletedTodo) =>
     setTodos(todos.filter((t) => t.id !== deletedTodo.id));
   //체크하거나 체크 해제하면 todo의 status가 바뀜(doing<->done)
-  const onUpdateStatus = (updatedTodo) =>
+  const onUpdate = (updatedTodo) =>
     setTodos(todos.map((t) => (t.id === updatedTodo.id ? updatedTodo : t)));
 
   //
@@ -43,7 +43,7 @@ function App() {
       <Filter filters={filters} onChangeFilter={onChangeFilter} todos={todos} />
       <TodoList
         onDelete={onDelete}
-        onUpdateStatus={onUpdateStatus}
+        onUpdate={onUpdate}
         filteredTodos={filteredTodos}
       />
       <button onClick={() => setTodos([])}>CLEAR ALL</button>

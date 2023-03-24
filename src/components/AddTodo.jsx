@@ -24,6 +24,7 @@ const AddTodo = ({ onAdd }) => {
           placeholder="WRITE A TO-DO"
           value={text}
           onChange={handleChange}
+          required
         />
         <button>➕</button>
       </form>
