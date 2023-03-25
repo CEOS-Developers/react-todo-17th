@@ -1,9 +1,38 @@
+import { useEffect, useState } from "react";
+import Mainpage from "./pages/Mainpage/Mainpage";
+
 function App() {
-  return (
-    <div>
-      <h1>17기 프론트 화이팅~ 우하하</h1>
-    </div>
+  const [clickedIcon, setClickedIcon] = useState("");
+  const [mainIconPosition, setMainIconPosition] = useState(
+    JSON.parse(localStorage.getItem("mainIconPosition")) ?? {
+      top: 30,
+      left: 30,
+    }
   );
+  const [textIconPosition, setTextIconPosition] = useState(
+    JSON.parse(localStorage.getItem("textIconPosition")) ?? {
+      top: 160,
+      left: 30,
+    }
+  );
+
+  useEffect(() => {
+    if (!localStorage.getItem("mainIconPosition")) {
+      localStorage.setItem(
+        "mainIconPosition",
+        JSON.stringify(mainIconPosition)
+      );
+    }
+    if (!localStorage.getItem("textIconPosition")) {
+      localStorage.setItem(
+        "textIconPosition",
+        JSON.stringify(textIconPosition)
+      );
+    }
+  }, [mainIconPosition, textIconPosition]);
+
+  useEffect(() => {});
+  return <Mainpage clickedIcon={clickedIcon} setClickedIcon={setClickedIcon} />;
 }
 
 export default App;
