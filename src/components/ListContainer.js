@@ -7,13 +7,13 @@ const ListContainer = ({
   todoList,
   setTodoList,
   isDone,
-  setIsVisibleModal, // 컴포넌트 재사용성이 낮아지는 것 같은데.. 우짜지
-  setSelectedTodo, // 컴포넌트 재사용성이 낮아지는 것 같은데.. 우짜지
+  setIsVisibleModal,
+  setSelectedTodo,
 }) => {
   const toggleIsDone = (e) => {
     const tempList = [...todoList];
     tempList.forEach((todo) => {
-      if (todo.time === e.target.parentElement.id) {
+      if (todo.time == e.target.parentElement.id) {
         todo.isDone = !todo.isDone;
       }
     });

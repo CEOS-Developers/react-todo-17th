@@ -32,7 +32,7 @@ const TodoList = () => {
     if (inputText.trim()) {
       const todoObj = {
         text: inputText, // string
-        time: String(Date.now()), // string,
+        time: Date.now(), // number
         isDone: false, // boolean
       };
       setTodoList([...todoList, todoObj]);
@@ -43,7 +43,7 @@ const TodoList = () => {
   };
 
   const removeTodo = () => {
-    const tempList = todoList.filter((todo) => todo.time !== selectedTodo.id);
+    const tempList = todoList.filter((todo) => todo.time != selectedTodo.id);
     setTodoList(tempList);
 
     localStorage.setItem(TODOKEY, JSON.stringify(tempList));
