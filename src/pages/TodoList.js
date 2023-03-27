@@ -22,13 +22,9 @@ const TodoList = () => {
     setInputText(e.target.value);
   };
 
-  const handleInputKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      submitInput();
-    }
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const submitInput = () => {
     if (inputText.trim()) {
       const todoObj = {
         text: inputText, // string
@@ -58,15 +54,14 @@ const TodoList = () => {
           <span>Things To Do</span>
         </Title>
 
-        <SectionInput>
+        <SectionInput onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="type here ..."
             value={inputText}
             onChange={handleInputChange}
-            onKeyDown={handleInputKeyDown}
           ></input>
-          <span onClick={submitInput}>+</span>
+          <button type="submit">+</button>
         </SectionInput>
 
         <Hr></Hr>
@@ -128,7 +123,7 @@ let Title = styled.div`
   user-select: none;
 `;
 
-let SectionInput = styled.div`
+let SectionInput = styled.form`
   width: calc(100% - 20px);
   height: 2rem;
   margin: 0.6rem;
@@ -149,9 +144,11 @@ let SectionInput = styled.div`
     }
   }
 
-  span {
+  button {
     margin: auto 0 auto auto;
     font-size: 1.5rem;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
   }
 `;
