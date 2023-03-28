@@ -1,9 +1,8 @@
+import styled from 'styled-components';
+import TodoList from './pages/TodoList';
+
 function App() {
-  return (
-    <div>
-      <h1>17기 프론트 화이팅~ 우하하</h1>
-    </div>
-  );
+  return <TodoList />;
 }
 
 export default App;
